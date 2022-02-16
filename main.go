@@ -139,6 +139,9 @@ func getEnvInt(key string, defaultVal int) int {
 }
 
 func main() {
+
+	collector.GetBuildHistoryInfo()
+
 	var (
 		jenkinsAddr = flag.String("jenkins.addr", getEnvStr("JENKINS_ADDR", ":58080"), "jenkins addr")
 		//jenkinsUser = flag.String("jenkins.user", getEnvStr("JENKINS_USER", "admin"), "jenkins user")

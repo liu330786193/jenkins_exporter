@@ -72,6 +72,16 @@ func (c *timeCollector) Update(ch chan<- prometheus.Metric) error {
 
 	level.Debug(c.logger).Log("msg", "Return time", "now", nowSec)
 	ch <- c.now.mustNewConstMetric(nowSec)
+	ch <- prometheus.MustNewConstMetric(
+		prometheus.NewDesc(
+			prometheus.BuildFQName(namespace, subsystem, "lyl_test"),
+			"System time zone offset in seconds.",
+			[]string{"aaa"}, nil,
+		),
+		prometheus.GaugeValue,
+		123456,
+		"path",
+	)
 	level.Debug(c.logger).Log("msg", "Zone offset", "offset", zoneOffset, "time_zone", zone)
 	ch <- c.zone.mustNewConstMetric(float64(zoneOffset), zone)
 	return c.update(ch)
